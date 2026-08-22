@@ -1,0 +1,8 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: var(--nati-ui-color-basic-700, #333);
+  border-top: 1px solid var(--nati-ui-color-basic-100, #e5e5e5);
+}

@@ -1,0 +1,12 @@
+<section class="articlesPage">
+  <h1 natiUiHeading>Articles</h1>
+
+  <ul class="articlesList">
+    @for (article of articles; track article.id) {
+      <li class="articleCard">
+        <h2 natiUiHeading size="h4">{{ article.title }}</h2>
+        <p>{{ article.excerpt }}</p>
+      </li>
+    }
+  </ul>
+</section>

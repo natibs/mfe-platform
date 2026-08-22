@@ -1,0 +1,4 @@
+# Root-level tooling (concurrently) only — each app has its own .gitignore for its own node_modules/dist.
+/node_modules
+.DS_Store
+Thumbs.db

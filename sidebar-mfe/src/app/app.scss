@@ -1,0 +1,63 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  min-height: 100%;
+  padding: 1.5rem 1rem;
+  background: var(--nati-ui-color-basic-50, #f5f8fb);
+  border-right: 1px solid var(--nati-ui-color-basic-100, #e5e5e5);
+  box-sizing: border-box;
+}
+
+.sidebar__brand {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--nati-ui-color-basic-700, #333);
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.sidebar__link {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--nati-ui-color-basic-700, #333);
+  text-decoration: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--nati-ui-color-basic-100, #e5e5e5);
+  }
+}
+
+.sidebar__link--active {
+  background: var(--nati-ui-color-basic-500, #004777);
+  color: white;
+}
+
+.sidebar__auth {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nati-ui-color-basic-100, #e5e5e5);
+}
+
+.sidebar__user {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--nati-ui-color-basic-700, #333);
+}

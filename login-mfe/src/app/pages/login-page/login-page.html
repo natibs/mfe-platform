@@ -1,0 +1,15 @@
+<div class="authCard">
+  <h1 natiUiHeading>Log in</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="authForm">
+    <input natiUiInput type="email" formControlName="email" label="Email" required />
+    <input natiUiInput type="password" formControlName="password" label="Password" required />
+
+    <button natiUiButton type="submit" variant="primary">Log in</button>
+  </form>
+
+  <div class="authLinks">
+    <a [routerLink]="['/', forgotPasswordPath]">Forgot password?</a>
+    <a [routerLink]="['/', signupPath]">Create an account</a>
+  </div>
+</div>

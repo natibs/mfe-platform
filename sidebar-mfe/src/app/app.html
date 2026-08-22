@@ -1,0 +1,24 @@
+<nav class="sidebar">
+  <span class="sidebar__brand">Nati UI Platform</span>
+
+  <ul class="sidebar__list">
+    @for (item of navItems; track item.path) {
+      <li>
+        <a [routerLink]="['/', item.path]" routerLinkActive="sidebar__link--active" class="sidebar__link">
+          {{ item.label }}
+        </a>
+      </li>
+    }
+  </ul>
+
+  <div class="sidebar__auth">
+    @if (auth.isAuthenticated()) {
+      <span class="sidebar__user">{{ auth.currentUser()?.name }}</span>
+      <button type="button" class="sidebar__link" (click)="auth.logout()">Log out</button>
+    } @else {
+      <a [routerLink]="['/', loginPath]" routerLinkActive="sidebar__link--active" class="sidebar__link">
+        Log in
+      </a>
+    }
+  </div>
+</nav>

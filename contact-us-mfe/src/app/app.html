@@ -1,0 +1,15 @@
+<section class="contactPage">
+  <h1 natiUiHeading>Contact Us</h1>
+
+  @if (submitted()) {
+    <p>Thanks for reaching out — we'll get back to you soon.</p>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()" class="contactForm">
+      <input natiUiInput type="text" formControlName="name" label="Name" required />
+      <input natiUiInput type="email" formControlName="email" label="Email" required />
+      <textarea natiUiTextarea formControlName="message" label="Message" required rows="5"></textarea>
+
+      <button natiUiButton type="submit" variant="primary">Send</button>
+    </form>
+  }
+</section>
