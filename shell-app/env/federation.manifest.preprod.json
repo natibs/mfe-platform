@@ -1,0 +1,8 @@
+{
+  "sidebar-mfe": "https://sidebar-mfe.preprod.mfe-platform.example.com/remoteEntry.json",
+  "footer-mfe": "https://footer-mfe.preprod.mfe-platform.example.com/remoteEntry.json",
+  "login-mfe": "https://login-mfe.preprod.mfe-platform.example.com/remoteEntry.json",
+  "articles-mfe": "https://articles-mfe.preprod.mfe-platform.example.com/remoteEntry.json",
+  "contact-us-mfe": "https://contact-us-mfe.preprod.mfe-platform.example.com/remoteEntry.json",
+  "about-us-mfe": "https://about-us-mfe.preprod.mfe-platform.example.com/remoteEntry.json"
+}

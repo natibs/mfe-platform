@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "set-env": "node scripts/set-federation-env.mjs"
   },
   "private": true,
   "packageManager": "npm@12.0.2",

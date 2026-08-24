@@ -81,6 +81,43 @@ npm run dev            # starts all 7 apps together (shell + 6 remotes) via conc
 Then open `http://localhost:4200`. Rebuilding `ui-components` uses its own
 `npm run link:lib` in that repo.
 
+## Deploying: one build, many environments
+
+`federation.manifest.json` is fetched over HTTP at runtime (`initFederation('/federation.manifest.json')`
+in `main.ts`) — it's a static asset, not something compiled into the JS
+bundle. That means the shell only ever needs to be **built once**; which
+remotes it points at is decided by which manifest file is sitting next to
+it when it's served, not by which `ng build` flags were used.
+
+`shell-app/env/` holds one manifest per environment:
+
+| File | Used for |
+| ---- | -------- |
+| `federation.manifest.dev.json` | Local dev — `localhost` ports, matches `npm run dev` |
+| `federation.manifest.qa.json` | QA |
+| `federation.manifest.preprod.json` | Pre-prod |
+| `federation.manifest.prod.json` | Production |
+
+`shell-app/scripts/set-federation-env.mjs` copies one of those onto a
+target path — `public/federation.manifest.json` by default (for local dev),
+or a built artifact's output directory when promoting a release:
+
+```bash
+npm run set-env dev                                                     # local dev (default)
+npm run set-env qa   -- --out dist/shell-app/browser/federation.manifest.json
+npm run set-env prod -- --out dist/shell-app/browser/federation.manifest.json
+```
+
+The deployment story this is meant to demonstrate: `ng build` runs **once**
+per release, producing one immutable artifact; a CI/CD pipeline then
+promotes that exact same artifact through QA → pre-prod → prod by running
+`set-env` with the target environment right before each deploy, so what
+gets tested in QA is byte-for-byte what ships to prod — only the remote
+URLs differ. Each remote MFE is expected to have its own equivalent
+per-environment deployment, living at whatever URL its manifest entry
+points to (placeholder domains here — swap in real ones once each remote
+has a pipeline).
+
 ## Adding a new remote
 
 1. `ng new <name>-mfe --style=scss --routing=false --ssr=false`
