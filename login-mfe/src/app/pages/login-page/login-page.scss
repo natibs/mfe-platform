@@ -1,6 +1,9 @@
 .authCard {
   max-width: 360px;
+  width: 100%;
   margin: 2rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .authForm {
@@ -12,11 +15,13 @@
 
 .authLinks {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
   justify-content: space-between;
   margin-top: 1rem;
   font-size: 0.875rem;
 
   a {
-    color: var(--nati-ui-color-basic-500, #004777);
+    color: var(--nati-ui-color-basic-fill);
   }
 }

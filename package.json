@@ -6,15 +6,16 @@
   "scripts": {
     "link:shared": "cd mfe-shared && npm run link:lib",
     "dev": "concurrently -n shell,sidebar,footer,login,articles,contact-us,about-us -c blue,green,yellow,magenta,cyan,red,white \"npm:start:shell\" \"npm:start:sidebar\" \"npm:start:footer\" \"npm:start:login\" \"npm:start:articles\" \"npm:start:contact-us\" \"npm:start:about-us\"",
-    "start:shell": "cd shell-app && npm start",
-    "start:sidebar": "cd sidebar-mfe && npm start",
-    "start:footer": "cd footer-mfe && npm start",
-    "start:login": "cd login-mfe && npm start",
-    "start:articles": "cd articles-mfe && npm start",
-    "start:contact-us": "cd contact-us-mfe && npm start",
-    "start:about-us": "cd about-us-mfe && npm start"
+    "start:shell": "cross-env PORT=4200 npm --prefix shell-app start",
+    "start:sidebar": "cross-env PORT=4201 npm --prefix sidebar-mfe start",
+    "start:footer": "cross-env PORT=4202 npm --prefix footer-mfe start",
+    "start:login": "cross-env PORT=4203 npm --prefix login-mfe start",
+    "start:articles": "cross-env PORT=4204 npm --prefix articles-mfe start",
+    "start:contact-us": "cross-env PORT=4205 npm --prefix contact-us-mfe start",
+    "start:about-us": "cross-env PORT=4206 npm --prefix about-us-mfe start"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3"
   }
 }

@@ -9,7 +9,8 @@
 
 .articleCard {
   padding: 1rem 1.25rem;
-  border: 1px solid var(--nati-ui-color-basic-100, #e5e5e5);
+  background: var(--nati-ui-color-neutral-50);
+  border: 1px solid var(--nati-ui-color-neutral-200);
   border-radius: 8px;
 
   h2 {
@@ -18,6 +19,6 @@
 
   p {
     margin: 0;
-    color: var(--nati-ui-color-basic-700, #333);
+    color: var(--nati-ui-color-neutral-700);
   }
 }

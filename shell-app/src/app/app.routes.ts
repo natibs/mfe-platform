@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { loadRemoteModule } from '@angular-architects/native-federation';
-import { ROUTE_PATHS } from 'shared-state';
+import { ROUTE_PATHS } from './nav-config';
 
 export const routes: Routes = [
   { path: '', redirectTo: ROUTE_PATHS.articles, pathMatch: 'full' },

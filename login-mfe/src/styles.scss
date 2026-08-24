@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Alef', sans-serif;
+  background: var(--nati-ui-color-neutral-0);
+  color: var(--nati-ui-color-neutral-900);
+}
+
+app-root {
+  display: block;
+  padding: 1.5rem;
+}

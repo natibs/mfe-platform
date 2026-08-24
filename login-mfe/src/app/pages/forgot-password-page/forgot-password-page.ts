@@ -6,7 +6,7 @@ import {
   NatiUiHeadingDirective,
   NatiUiInputDirective,
 } from 'ui-components';
-import { ROUTE_PATHS } from 'shared-state';
+import { LOGIN_PATHS } from '../../login-paths';
 
 @Component({
   selector: 'app-forgot-password-page',
@@ -23,7 +23,7 @@ import { ROUTE_PATHS } from 'shared-state';
 export class ForgotPasswordPage {
   private readonly fb = inject(FormBuilder);
 
-  protected readonly loginPath = ROUTE_PATHS.login;
+  protected readonly loginPath = LOGIN_PATHS.login;
   protected readonly submitted = signal(false);
 
   protected readonly form = this.fb.nonNullable.group({
@@ -36,7 +36,6 @@ export class ForgotPasswordPage {
       return;
     }
 
-    // No backend yet — this just simulates the "check your email" step.
     this.submitted.set(true);
   }
 }

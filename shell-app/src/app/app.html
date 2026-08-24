@@ -1,8 +1,15 @@
 <div class="shellLayout">
-  <app-remote-outlet class="shellSidebar" remoteName="sidebar-mfe" exposedModule="./Component" />
+  <app-remote-outlet
+    class="shellSidebar"
+    remoteName="sidebar-mfe"
+    exposedModule="./Component"
+    [inputs]="sidebarInputs"
+  />
 
   <main class="shellMain">
-    <router-outlet />
+    <div class="shellMainInner">
+      <router-outlet />
+    </div>
   </main>
 </div>
 

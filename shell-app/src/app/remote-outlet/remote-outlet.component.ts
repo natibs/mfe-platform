@@ -1,12 +1,6 @@
 import { Component, Type, ViewContainerRef, effect, inject, input } from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/native-federation';
 
-/**
- * Mounts a remote's exposed component outside the Router (for MFEs like the
- * sidebar/footer that are always present, not tied to a route). Every remote
- * exposes its root component under the same export name, RemoteEntryComponent,
- * so this stays generic across all of them.
- */
 @Component({
   selector: 'app-remote-outlet',
   template: '',
@@ -14,6 +8,7 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
 export class RemoteOutletComponent {
   readonly remoteName = input.required<string>();
   readonly exposedModule = input.required<string>();
+  readonly inputs = input<Record<string, unknown>>({});
 
   private readonly vcr = inject(ViewContainerRef);
 
@@ -21,11 +16,15 @@ export class RemoteOutletComponent {
     effect(() => {
       const remoteName = this.remoteName();
       const exposedModule = this.exposedModule();
+      const inputs = this.inputs();
 
       loadRemoteModule(remoteName, exposedModule)
         .then((m) => {
           this.vcr.clear();
-          this.vcr.createComponent(m.RemoteEntryComponent as Type<unknown>);
+          const componentRef = this.vcr.createComponent(m.RemoteEntryComponent as Type<unknown>);
+          for (const [key, value] of Object.entries(inputs)) {
+            componentRef.setInput(key, value);
+          }
         })
         .catch((err) => console.error(`Failed to load remote ${remoteName}${exposedModule}`, err));
     });

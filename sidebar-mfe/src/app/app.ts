@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService, NAV_ITEMS, ROUTE_PATHS } from 'shared-state';
+import { AuthService, NavItem } from 'shared-state';
 
 @Component({
   imports: [RouterLink, RouterLinkActive],
@@ -10,6 +10,7 @@ import { AuthService, NAV_ITEMS, ROUTE_PATHS } from 'shared-state';
 })
 export class RemoteEntryComponent {
   protected readonly auth = inject(AuthService);
-  protected readonly navItems = NAV_ITEMS;
-  protected readonly loginPath = ROUTE_PATHS.login;
+
+  readonly navItems = input<readonly NavItem[]>([]);
+  readonly loginPath = input('login');
 }

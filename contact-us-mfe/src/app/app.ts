@@ -36,7 +36,6 @@ export class RemoteEntryComponent {
       return;
     }
 
-    // No backend yet — this just simulates a successful send.
     this.submitted.set(true);
     this.form.reset();
   }

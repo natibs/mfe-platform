@@ -6,7 +6,8 @@ import {
   NatiUiHeadingDirective,
   NatiUiInputDirective,
 } from 'ui-components';
-import { AuthService, ROUTE_PATHS } from 'shared-state';
+import { AuthService } from 'shared-state';
+import { LOGIN_PATHS } from '../../login-paths';
 
 @Component({
   selector: 'app-signup-page',
@@ -25,7 +26,7 @@ export class SignupPage {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
 
-  protected readonly loginPath = ROUTE_PATHS.login;
+  protected readonly loginPath = LOGIN_PATHS.login;
 
   protected readonly form = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -41,6 +42,6 @@ export class SignupPage {
 
     const { name, email } = this.form.getRawValue();
     this.auth.login({ id: crypto.randomUUID(), name, email });
-    this.router.navigate(['/', ROUTE_PATHS.articles]);
+    this.router.navigate(['/']);
   }
 }

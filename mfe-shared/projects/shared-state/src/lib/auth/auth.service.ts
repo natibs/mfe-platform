@@ -3,12 +3,6 @@ import { User } from '../models/user.model';
 
 const STORAGE_KEY = 'mfe.auth.user';
 
-/**
- * Shared as a federation singleton (see federation.config.js in each app) so the
- * shell, sidebar, and login remote all observe the same live instance instead of
- * each getting their own copy of the module. localStorage is only there so state
- * survives a full page reload, not for cross-instance sync.
- */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly currentUserSignal = signal<User | null>(this.readStoredUser());

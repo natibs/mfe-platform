@@ -4,15 +4,33 @@
   width: 220px;
   min-height: 100%;
   padding: 1.5rem 1rem;
-  background: var(--nati-ui-color-basic-50, #f5f8fb);
-  border-right: 1px solid var(--nati-ui-color-basic-100, #e5e5e5);
+  background: var(--nati-ui-color-neutral-50);
+  border-right: 1px solid var(--nati-ui-color-neutral-200);
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-height: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--nati-ui-color-neutral-200);
+  }
 }
 
 .sidebar__brand {
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: var(--nati-ui-color-basic-700, #333);
+  color: var(--nati-ui-color-neutral-900);
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+    margin-right: auto;
+  }
 }
 
 .sidebar__list {
@@ -23,6 +41,12 @@
   flex-direction: column;
   gap: 0.25rem;
   flex: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+  }
 }
 
 .sidebar__link {
@@ -32,20 +56,29 @@
   border: none;
   border-radius: 6px;
   background: transparent;
-  color: var(--nati-ui-color-basic-700, #333);
+  color: var(--nati-ui-color-neutral-800);
   text-decoration: none;
   font: inherit;
   text-align: left;
   cursor: pointer;
+  white-space: nowrap;
 
   &:hover {
-    background: var(--nati-ui-color-basic-100, #e5e5e5);
+    background: var(--nati-ui-color-neutral-100);
+  }
+
+  @media (max-width: 768px) {
+    width: auto;
   }
 }
 
 .sidebar__link--active {
-  background: var(--nati-ui-color-basic-500, #004777);
-  color: white;
+  background: var(--nati-ui-color-basic-fill);
+  color: var(--nati-ui-color-basic-on-fill);
+
+  &:hover {
+    background: var(--nati-ui-color-basic-fill);
+  }
 }
 
 .sidebar__auth {
@@ -53,11 +86,20 @@
   flex-direction: column;
   gap: 0.25rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--nati-ui-color-basic-100, #e5e5e5);
+  border-top: 1px solid var(--nati-ui-color-neutral-200);
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0;
+    border-top: none;
+    margin-left: auto;
+  }
 }
 
 .sidebar__user {
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
-  color: var(--nati-ui-color-basic-700, #333);
+  color: var(--nati-ui-color-neutral-700);
+  white-space: nowrap;
 }

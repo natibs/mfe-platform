@@ -24,14 +24,11 @@ so any of them can be built, tested, and deployed on its own.
 Published from `mfe-shared/projects/shared-state`, consumed by every app via
 `npm link` and shared at runtime as a **Native Federation singleton** (see
 `shared: shareAll(...)` in each app's `federation.config.mjs`) — so `shell`,
-`sidebar-mfe`, and `login-mfe` all observe the *same live instance* of:
-
-- `AuthService` — signal-based, holds the current user, persists to
-  `localStorage`. `sidebar-mfe` reads `auth.isAuthenticated()` to switch
-  between "Log in" and the user's name; `login-mfe` calls `auth.login()`.
-- `ROUTE_PATHS` / `NAV_ITEMS` — the route segment strings, defined once so
-  the shell's routes, the sidebar's links, and login's internal routes never
-  drift out of sync.
+`sidebar-mfe`, and `login-mfe` all observe the *same live instance* of
+`AuthService` (signal-based, holds the current user, persists to
+`localStorage`). It also exports the `User`/`NavItem` type contracts. It does
+**not** hold any route paths — those belong to whichever app owns that
+routing decision (see below).
 
 Every app also links the existing [`ui-components`](../ui-components) library
 the same way, for a consistent look (`natiUiInput`, `natiUiButton`,
@@ -39,22 +36,33 @@ the same way, for a consistent look (`natiUiInput`, `natiUiButton`,
 
 ## How the shell composes everything
 
+- `shell-app/src/app/nav-config.ts` is the single place the site's page list
+  (`ROUTE_PATHS`, `NAV_ITEMS`) is defined — the shell owns routing, so it
+  owns this, rather than it living in a shared library every remote has to
+  import from.
 - `shell-app/public/federation.manifest.json` lists every remote's
   `remoteEntry.json` URL. `main.ts` calls `initFederation('/federation.manifest.json')`
   before bootstrapping.
 - `sidebar-mfe` and `footer-mfe` aren't tied to a route — they're mounted by
   a small generic `RemoteOutletComponent`
   (`shell-app/src/app/remote-outlet/remote-outlet.component.ts`) that calls
-  `loadRemoteModule()` and creates the component dynamically. Every remote
-  exposes its root component under the same name, `RemoteEntryComponent`, so
-  this stays generic.
+  `loadRemoteModule()`, creates the component dynamically, and applies an
+  `inputs` record via `componentRef.setInput()`. `sidebar-mfe`'s
+  `RemoteEntryComponent` takes `navItems`/`loginPath` as `input()`s — it
+  renders whatever the shell hands it, rather than importing path constants
+  itself. Every remote exposes its root component under the same name,
+  `RemoteEntryComponent`, so this stays generic.
 - `articles-mfe` / `contact-us-mfe` / `about-us-mfe` are wired as ordinary
   lazy routes (`loadComponent: () => loadRemoteModule(...)`) in
   `shell-app/src/app/app.routes.ts`.
 - `login-mfe` is wired as `loadChildren`, exposing a `./Routes` module
   (`LOGIN_ROUTES`) instead of a single component, so its three pages
   (`/login`, `/signup`, `/forgot-password`) become normal child routes of
-  the shell's router.
+  the shell's router. Those three path segments are `login-mfe`'s own
+  concern — defined locally in `login-mfe/src/app/login-paths.ts`, not
+  shared, since only `login-mfe` itself links between those pages. After
+  login/signup it navigates to `/`, letting the shell's own default-route
+  redirect (in `nav-config.ts`) decide where that lands.
 
 Because `@angular/router` is shared as a federation singleton, `routerLink`
 inside `sidebar-mfe` and `login-mfe` navigates the shell's *own* Router —
